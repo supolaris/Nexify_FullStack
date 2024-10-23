@@ -3,13 +3,32 @@ import React from 'react';
 import {AppColors} from '../../../constants/AppColors';
 
 interface IRoundButtonProps {
-  onPress: () => void;
+  height: number;
+  width: number;
+  borderRadius: number;
+  backgroundColor: string;
   children: any;
+  onPress: () => void;
 }
 
-const RoundButton: React.FC<IRoundButtonProps> = ({onPress, children}) => {
+const RoundButton: React.FC<IRoundButtonProps> = ({
+  borderRadius,
+  width,
+  height,
+  backgroundColor,
+  children,
+  onPress,
+}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        ...styles.container,
+        height: height,
+        width: width,
+        borderRadius: borderRadius,
+        backgroundColor: backgroundColor,
+      }}>
       {children}
     </TouchableOpacity>
   );

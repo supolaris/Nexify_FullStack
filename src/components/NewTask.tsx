@@ -64,7 +64,12 @@ const NewTask = (props: INewTaskProps) => {
           </View>
 
           <View style={styles.buttonsView}>
-            <RoundButton onPress={() => {}}>
+            <RoundButton
+              onPress={() => {}}
+              height={45}
+              width={45}
+              borderRadius={45}
+              backgroundColor={AppColors.background}>
               <MaterialCommunityIcons
                 name="clock-plus-outline"
                 size={18}
@@ -72,7 +77,12 @@ const NewTask = (props: INewTaskProps) => {
               />
             </RoundButton>
             <View style={styles.secondButtonView}>
-              <RoundButton onPress={() => {}}>
+              <RoundButton
+                onPress={() => {}}
+                height={45}
+                width={45}
+                borderRadius={45}
+                backgroundColor={AppColors.background}>
                 <MaterialCommunityIcons
                   name="bell-plus-outline"
                   size={18}
@@ -86,7 +96,12 @@ const NewTask = (props: INewTaskProps) => {
             <Text style={styles.projectsTitleText}>Projects</Text>
 
             <View style={styles.projectsView}>
-              <RoundButton onPress={() => {}}>
+              <RoundButton
+                onPress={() => {}}
+                height={45}
+                width={45}
+                borderRadius={45}
+                backgroundColor={AppColors.background}>
                 <MaterialCommunityIcons
                   name="clock-plus-outline"
                   size={18}

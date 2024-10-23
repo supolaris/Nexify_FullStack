@@ -15,11 +15,21 @@ const PrimaryHeader = (props: IPrimaryHeader) => {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <RoundButton onPress={props.onCrossPressed}>
+        <RoundButton
+          onPress={props.onCrossPressed}
+          height={45}
+          width={45}
+          borderRadius={45}
+          backgroundColor={AppColors.background}>
           <Octicons name="x" size={18} color={AppColors.black} />
         </RoundButton>
         {props.isOptionButtonVisible && (
-          <RoundButton onPress={props.onOptionPressed}>
+          <RoundButton
+            onPress={props.onOptionPressed}
+            height={45}
+            width={45}
+            borderRadius={45}
+            backgroundColor={AppColors.background}>
             <Feather name="more-horizontal" size={18} color={AppColors.black} />
           </RoundButton>
         )}

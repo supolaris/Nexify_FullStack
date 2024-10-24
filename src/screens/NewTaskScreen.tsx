@@ -2,10 +2,10 @@ import React from 'react';
 import NewTask from '../components/NewTask';
 import {projectsData} from '../constants/StaticData';
 
-import {useAppNaviation} from '../@types/AppNavigation';
+import {useAppNavigation} from '../@types/AppNavigation';
 
 const NewTaskScreen = () => {
-  const navigation = useAppNaviation();
+  const navigation = useAppNavigation();
 
   const onTaskCreatePressed = () => {
     navigation.navigate('HomeScreen');

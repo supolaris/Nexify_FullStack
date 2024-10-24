@@ -5,6 +5,7 @@ import SplashScreen from '../screens/SplashScreen';
 import LoginScreen from '../screens/LoginScreen';
 import NewTaskScreen from '../screens/NewTaskScreen';
 import HomeScreen from '../screens/HomeScreen';
+import ProjectDetailsScreen from '../screens/ProjectDetailsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import {RootStackParamList} from '../@types/NavigationTypes';
 
@@ -23,6 +24,10 @@ export const Routes = () => {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="NewTaskScreen" component={NewTaskScreen} />
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen
+        name="ProjectDetailsScreen"
+        component={ProjectDetailsScreen}
+      />
       <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
     </Stack.Navigator>
   );

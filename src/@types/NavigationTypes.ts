@@ -9,5 +9,6 @@ export type RootStackParamList = {
   LoginScreen: undefined;
   NewTaskScreen: undefined;
   HomeScreen: undefined;
+  ProjectDetailsScreen: undefined;
   ProfileScreen: undefined;
 };

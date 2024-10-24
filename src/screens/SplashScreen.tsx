@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import Splash from '../components/Splash';
-import {useAppNaviation} from '../@types/AppNavigation';
+import {useAppNavigation} from '../@types/AppNavigation';
 import {MainStackScreenProps} from '../@types/NavigationTypes';
 
 const SplashScreen = ({navigation}: MainStackScreenProps<'SplashScreen'>) => {
-  // const navigation = useAppNaviation();
+  // const navigation = useAppNavigation();
 
   useEffect(() => {
     setTimeout(() => {

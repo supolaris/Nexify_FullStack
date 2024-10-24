@@ -5,6 +5,7 @@ import {
   ImageBackground,
   Image,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import TitleText from './commons/texts/TitleText';
@@ -13,15 +14,20 @@ import RoundButton from './commons/buttons/RoundButton';
 import {IprojectsData} from '../@types/CommonTypes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
+import {ActiveOpacity} from '../utils/CommonFunctions';
 
 interface IHomeProps {
   projectsData: IprojectsData[];
+  onProjectPresssed: () => void;
 }
 
 const Home = (props: IHomeProps) => {
   const renderProjects = ({item}: {item: IprojectsData}) => {
     return (
-      <View style={styles.projectsView}>
+      <TouchableOpacity
+        style={styles.projectsView}
+        onPress={props.onProjectPresssed}
+        activeOpacity={ActiveOpacity}>
         <ImageBackground
           style={styles.pbgImage}
           resizeMode="stretch"
@@ -55,7 +61,7 @@ const Home = (props: IHomeProps) => {
             </RoundButton>
           </View>
         </ImageBackground>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -72,7 +78,9 @@ const Home = (props: IHomeProps) => {
             <View style={styles.secondTitleView}>
               <TitleText text="Projects" />
               <View style={{marginLeft: 10}}>
-                <TitleText text="(4)" />
+                {props.projectsData?.length > 0 && (
+                  <TitleText text={`(${props.projectsData?.length})`} />
+                )}
               </View>
             </View>
           </View>

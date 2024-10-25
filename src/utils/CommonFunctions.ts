@@ -1,2 +1,1 @@
-export const ActiveOpacity = 0.5;
-export const BorderRadius = 20;
+export const ActiveOpacity = 0.6;

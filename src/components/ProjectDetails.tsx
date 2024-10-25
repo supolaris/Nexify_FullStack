@@ -14,34 +14,45 @@ import {AppColors} from '../constants/AppColors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {IprojectTasksData} from '../@types/CommonTypes';
+import {ActiveOpacity} from '../utils/CommonFunctions';
 
 interface IProjectDetails {
-  projectTasksData: IprojectTasksData[];
+  isCompletedTaskOpen: boolean;
+  projectCompletedTasksData: IprojectTasksData[];
+  projectIncompleteTasksData: IprojectTasksData[];
+  onCompletedOpenPressed: () => void;
+  onBackArrowPressed: () => void;
 }
 
 const ProjectDetails = (props: IProjectDetails) => {
   const renderTasks = ({item}: {item: IprojectTasksData}) => {
     return (
-      <View style={styles.renderContainer}>
-        <TouchableOpacity
-          style={styles.renderTaskTouchable}
-          disabled={item.isCompleted}>
-          {item.isCompleted ? (
-            <View style={styles.renderIconView}>
-              <Feather name="check-circle" size={25} color={AppColors.black} />
-            </View>
-          ) : (
-            <View style={styles.renderIconView}>
-              <Feather name="circle" size={25} color={AppColors.black} />
-            </View>
-          )}
-          <View style={styles.renderTextView}>
-            <Text style={styles.renderTitleText}>{item.title}</Text>
+      <TouchableOpacity
+        activeOpacity={ActiveOpacity}
+        style={styles.renderTaskTouchable}
+        disabled={item.isCompleted}>
+        {item.isCompleted ? (
+          <View style={styles.renderIconView}>
+            <Feather name="check-circle" size={25} color={AppColors.black} />
           </View>
-        </TouchableOpacity>
-      </View>
+        ) : (
+          <View style={styles.renderIconView}>
+            <Feather name="circle" size={25} color={AppColors.inactiveGray} />
+          </View>
+        )}
+        <View style={styles.renderTextView}>
+          <Text
+            style={{
+              ...styles.renderTitleText,
+              color: item.isCompleted
+                ? AppColors.inactiveGray
+                : AppColors.black,
+            }}>
+            {item.title}
+          </Text>
+        </View>
+      </TouchableOpacity>
     );
   };
 
@@ -55,10 +66,10 @@ const ProjectDetails = (props: IProjectDetails) => {
           <ImageBackground
             style={styles.pbgImage}
             resizeMode="stretch"
-            source={require('../assets/images/pbg.jpg')}>
+            source={require('../assets/images/cardBg2.png')}>
             <View style={styles.buttonsView}>
               <RoundButton
-                onPress={() => {}}
+                onPress={props.onBackArrowPressed}
                 height={70}
                 width={70}
                 borderRadius={70}
@@ -84,7 +95,10 @@ const ProjectDetails = (props: IProjectDetails) => {
             </View>
             <TitleText text="Hello world" />
             <View style={styles.taskCountView}>
-              <Text style={styles.taskCountText}>8/10</Text>
+              <Text
+                style={
+                  styles.taskCountText
+                }>{`${props.projectCompletedTasksData?.length}/${props.projectIncompleteTasksData?.length}`}</Text>
               <Text style={styles.taskCountText}>Tasks</Text>
             </View>
           </ImageBackground>
@@ -109,20 +123,44 @@ const ProjectDetails = (props: IProjectDetails) => {
           <View style={styles.taskFlastlistView}>
             <FlatList
               showsVerticalScrollIndicator={false}
-              data={props.projectTasksData}
+              data={props.projectCompletedTasksData}
               renderItem={renderTasks}
               keyExtractor={item => item.id.toString()}
             />
           </View>
 
           <View style={styles.taskFlastlistView}>
-            <Text>Completed{'(2)'}</Text>
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              data={props.projectTasksData}
-              renderItem={renderTasks}
-              keyExtractor={item => item.id.toString()}
-            />
+            <View
+              style={{
+                ...styles.titleIconView,
+                marginBottom: props.isCompletedTaskOpen ? 10 : 40,
+              }}>
+              <Text style={styles.completedText}>
+                Completed {`(${props.projectIncompleteTasksData?.length})`}
+              </Text>
+              <TouchableOpacity onPress={props.onCompletedOpenPressed}>
+                <MaterialIcons
+                  name={
+                    props.isCompletedTaskOpen
+                      ? 'keyboard-arrow-up'
+                      : 'keyboard-arrow-down'
+                  }
+                  size={25}
+                  color={AppColors.black}
+                />
+              </TouchableOpacity>
+            </View>
+            {props.isCompletedTaskOpen && (
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                data={props.projectCompletedTasksData}
+                renderItem={renderTasks}
+                keyExtractor={item => item.id.toString()}
+                ListFooterComponent={() => {
+                  return <View style={{height: 30}}></View>;
+                }}
+              />
+            )}
           </View>
         </ScrollView>
       </ImageBackground>
@@ -133,21 +171,25 @@ const ProjectDetails = (props: IProjectDetails) => {
 export default ProjectDetails;
 
 const styles = StyleSheet.create({
-  renderContainer: {
-    // width: '90%',
-    // alignSelf: 'center',
-    paddingVertical: 10,
-    borderBottomWidth: 0.5,
-    borderBottomColor: AppColors.black,
-  },
+  renderContainer: {},
   renderTaskTouchable: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 20,
+    borderBottomWidth: 0.5,
+    borderBottomColor: AppColors.inactiveGray,
   },
-  renderIconView: {},
-  renderTextView: {},
+  renderIconView: {
+    width: '5%',
+
+    marginRight: 10,
+  },
+  renderTextView: {
+    width: '92%',
+  },
   renderTitleText: {
-    fontSize: 15,
+    width: '98%',
+    fontSize: 16,
     color: AppColors.black,
   },
   //
@@ -160,7 +202,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   pbgImage: {
-    height: 400,
+    height: 450,
     overflow: 'hidden',
     borderRadius: 20,
     justifyContent: 'space-between',
@@ -177,12 +219,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  // pendingView: {},
-  // completedView: {},
 
   taskFlastlistView: {
     flex: 1,
     width: '90%',
     alignSelf: 'center',
+  },
+  titleIconView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 40,
+    marginBottom: 10,
+  },
+  completedText: {
+    fontSize: 18,
+    color: AppColors.black,
   },
 });

@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {AppColors} from '../../../constants/AppColors';
+import {ActiveOpacity} from '../../../utils/CommonFunctions';
 
 interface IRoundButtonProps {
   height: number;
@@ -21,6 +22,7 @@ const RoundButton: React.FC<IRoundButtonProps> = ({
 }) => {
   return (
     <TouchableOpacity
+      activeOpacity={ActiveOpacity}
       onPress={onPress}
       style={{
         ...styles.container,

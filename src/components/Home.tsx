@@ -31,7 +31,7 @@ const Home = (props: IHomeProps) => {
         <ImageBackground
           style={styles.pbgImage}
           resizeMode="stretch"
-          source={require('../assets/images/pbg.jpg')}>
+          source={require('../assets/images/cardBg.jpg')}>
           <TitleText text={item.title} />
           <View style={styles.taskCountView}>
             <Text style={styles.taskCountText}>8/10</Text>
@@ -71,35 +71,38 @@ const Home = (props: IHomeProps) => {
       resizeMode="stretch"
       source={require('../assets/images/bg3.png')}>
       <View style={styles.innerContainer}>
-        <Text style={styles.greetingText}>Greetings, Suleman</Text>
-        <View style={styles.tiltesImageview}>
-          <View style={styles.titlesView}>
-            <TitleText text="Your" />
-            <View style={styles.secondTitleView}>
-              <TitleText text="Projects" />
-              <View style={{marginLeft: 10}}>
-                {props.projectsData?.length > 0 && (
-                  <TitleText text={`(${props.projectsData?.length})`} />
-                )}
+        <View style={{}}>
+          <Text style={styles.greetingText}>Greetings, Suleman</Text>
+          <View style={styles.tiltesImageview}>
+            <View style={styles.titlesView}>
+              <TitleText text="Your" />
+              <View style={styles.secondTitleView}>
+                <TitleText text="Projects" />
+                <View style={{marginLeft: 10}}>
+                  {props.projectsData?.length > 0 && (
+                    <TitleText text={`(${props.projectsData?.length})`} />
+                  )}
+                </View>
               </View>
             </View>
-          </View>
-          <View style={styles.imageView}>
-            <Image
-              style={styles.image}
-              resizeMode="contain"
-              source={require('../assets/images/logo.png')}
-            />
+            <View style={styles.imageView}>
+              <Image
+                style={styles.image}
+                resizeMode="contain"
+                source={require('../assets/images/logo.png')}
+              />
+            </View>
           </View>
         </View>
 
-        <View>
+        <View style={{height: '100%'}}>
           <FlatList
+            showsVerticalScrollIndicator={false}
             data={props.projectsData}
             renderItem={renderProjects}
             keyExtractor={item => item.id.toString()}
-            ListHeaderComponent={() => {
-              return <View style={{height: 20}}></View>;
+            ListFooterComponent={() => {
+              return <View style={{height: 220}}></View>;
             }}
           />
         </View>
@@ -115,6 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   innerContainer: {
+    flex: 1,
     marginTop: 60,
     width: '90%',
     alignSelf: 'center',
@@ -148,7 +152,7 @@ const styles = StyleSheet.create({
   },
 
   pbgImage: {
-    height: 350,
+    height: 450,
     overflow: 'hidden',
     borderRadius: 20,
     justifyContent: 'space-between',

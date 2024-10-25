@@ -6,6 +6,8 @@ interface IPrimaryTextinputProps {
   inputValue: string;
   maxLength: number;
   placeholder: string;
+  multiline: boolean;
+  height: number;
   handleInputChange: (val: string) => void;
 }
 
@@ -13,9 +15,10 @@ const PrimaryTextinput = (props: IPrimaryTextinputProps) => {
   return (
     <TextInput
       maxLength={props.maxLength}
-      style={style.input}
+      multiline={props.multiline}
+      style={{...style.input, height: props.height}}
       placeholder={props.placeholder}
-      placeholderTextColor={AppColors.black}
+      placeholderTextColor={AppColors.inactiveGray}
       value={props.inputValue}
       onChangeText={(val: string) => props.handleInputChange(val)}
     />

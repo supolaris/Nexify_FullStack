@@ -18,7 +18,8 @@ import {ActiveOpacity} from '../utils/CommonFunctions';
 
 interface IHomeProps {
   projectsData: IprojectsData[];
-  onProjectPresssed: () => void;
+  onProjectPresssed: (item: IprojectsData) => void;
+  onTaskAddPressed: (id: number) => void;
 }
 
 const Home = (props: IHomeProps) => {
@@ -26,7 +27,7 @@ const Home = (props: IHomeProps) => {
     return (
       <TouchableOpacity
         style={styles.projectsView}
-        onPress={props.onProjectPresssed}
+        onPress={() => props.onProjectPresssed(item)}
         activeOpacity={ActiveOpacity}>
         <ImageBackground
           style={styles.pbgImage}
@@ -52,7 +53,7 @@ const Home = (props: IHomeProps) => {
               />
             </RoundButton>
             <RoundButton
-              onPress={() => {}}
+              onPress={() => props.onTaskAddPressed(item.id)}
               height={70}
               width={70}
               borderRadius={70}

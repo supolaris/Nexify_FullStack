@@ -7,7 +7,7 @@ import Feather from 'react-native-vector-icons/Feather';
 
 interface IPrimaryHeader {
   isOptionButtonVisible: boolean;
-  onCrossPressed: () => void;
+  onHeaderCrossPressed: () => void;
   onOptionPressed: () => void;
 }
 
@@ -16,7 +16,7 @@ const PrimaryHeader = (props: IPrimaryHeader) => {
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <RoundButton
-          onPress={props.onCrossPressed}
+          onPress={props.onHeaderCrossPressed}
           height={45}
           width={45}
           borderRadius={45}

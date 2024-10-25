@@ -21,38 +21,46 @@ interface IProjectDetails {
   isCompletedTaskOpen: boolean;
   projectCompletedTasksData: IprojectTasksData[];
   projectIncompleteTasksData: IprojectTasksData[];
+  item: IprojectTasksData;
   onCompletedOpenPressed: () => void;
   onBackArrowPressed: () => void;
+  onTaskAddPressed: (id: number) => void;
 }
 
 const ProjectDetails = (props: IProjectDetails) => {
   const renderTasks = ({item}: {item: IprojectTasksData}) => {
     return (
-      <TouchableOpacity
-        activeOpacity={ActiveOpacity}
-        style={styles.renderTaskTouchable}
-        disabled={item.isCompleted}>
-        {item.isCompleted ? (
-          <View style={styles.renderIconView}>
-            <Feather name="check-circle" size={25} color={AppColors.black} />
+      <View style={styles.renderContainer}>
+        <TouchableOpacity
+          activeOpacity={ActiveOpacity}
+          style={styles.renderTaskTouchable}
+          disabled={item.isCompleted}>
+          {item.isCompleted ? (
+            <View style={styles.renderIconView}>
+              <Feather
+                name="check-circle"
+                size={25}
+                color={AppColors.inactiveGray}
+              />
+            </View>
+          ) : (
+            <View style={styles.renderIconView}>
+              <Feather name="circle" size={25} color={AppColors.black} />
+            </View>
+          )}
+          <View style={styles.renderTextView}>
+            <Text
+              style={{
+                ...styles.renderTitleText,
+                color: item.isCompleted
+                  ? AppColors.inactiveGray
+                  : AppColors.inactiveGray,
+              }}>
+              {item.title}
+            </Text>
           </View>
-        ) : (
-          <View style={styles.renderIconView}>
-            <Feather name="circle" size={25} color={AppColors.inactiveGray} />
-          </View>
-        )}
-        <View style={styles.renderTextView}>
-          <Text
-            style={{
-              ...styles.renderTitleText,
-              color: item.isCompleted
-                ? AppColors.inactiveGray
-                : AppColors.black,
-            }}>
-            {item.title}
-          </Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -102,14 +110,9 @@ const ProjectDetails = (props: IProjectDetails) => {
               <Text style={styles.taskCountText}>Tasks</Text>
             </View>
           </ImageBackground>
-          <View
-            style={{
-              position: 'absolute',
-              bottom: -30,
-              left: 220,
-            }}>
+          <View style={styles.plusView}>
             <RoundButton
-              onPress={() => {}}
+              onPress={() => props.onTaskAddPressed(props.item?.id)}
               height={90}
               width={90}
               borderRadius={90}
@@ -123,7 +126,7 @@ const ProjectDetails = (props: IProjectDetails) => {
           <View style={styles.taskFlastlistView}>
             <FlatList
               showsVerticalScrollIndicator={false}
-              data={props.projectCompletedTasksData}
+              data={props.projectIncompleteTasksData}
               renderItem={renderTasks}
               keyExtractor={item => item.id.toString()}
             />
@@ -171,13 +174,14 @@ const ProjectDetails = (props: IProjectDetails) => {
 export default ProjectDetails;
 
 const styles = StyleSheet.create({
-  renderContainer: {},
+  renderContainer: {
+    borderBottomWidth: 0.5,
+    borderBottomColor: AppColors.inactiveGray,
+  },
   renderTaskTouchable: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 20,
-    borderBottomWidth: 0.5,
-    borderBottomColor: AppColors.inactiveGray,
   },
   renderIconView: {
     width: '5%',
@@ -224,6 +228,12 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '90%',
     alignSelf: 'center',
+  },
+  plusView: {
+    position: 'absolute',
+    bottom: -30,
+    left: 220,
+    zIndex: 1,
   },
   titleIconView: {
     flexDirection: 'row',

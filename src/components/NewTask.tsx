@@ -9,11 +9,19 @@ import RoundButton from './commons/buttons/RoundButton';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import PrimaryTextinput from './commons/textInputs/PrimaryTextinput';
 import PrimaryBlackButton from './commons/buttons/PrimaryBlackButton';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {IprojectsData} from '../@types/CommonTypes';
 
 interface INewTaskProps {
   projectsData: IprojectsData[];
+  inputVals: {
+    titleVal: string;
+    descriptionVal: string;
+  };
+  handleInputChange: (field: string, val: string) => void;
   onTaskCreatePressed: () => void;
+  onHeaderCrossPressed: () => void;
+  onProjectAddPressed: () => void;
 }
 
 const NewTask = (props: INewTaskProps) => {
@@ -37,7 +45,7 @@ const NewTask = (props: INewTaskProps) => {
       source={require('../assets/images/bg3.png')}>
       <PrimaryHeader
         isOptionButtonVisible={false}
-        onCrossPressed={() => {}}
+        onHeaderCrossPressed={props.onHeaderCrossPressed}
         onOptionPressed={() => {}}
       />
       <View style={styles.innerContainer}>
@@ -97,16 +105,12 @@ const NewTask = (props: INewTaskProps) => {
 
             <View style={styles.projectsView}>
               <RoundButton
-                onPress={() => {}}
+                onPress={props.onProjectAddPressed}
                 height={45}
                 width={45}
                 borderRadius={45}
                 backgroundColor={AppColors.background}>
-                <MaterialCommunityIcons
-                  name="clock-plus-outline"
-                  size={18}
-                  color={AppColors.black}
-                />
+                <AntDesign name="plus" size={18} color={AppColors.black} />
               </RoundButton>
 
               <View style={styles.projectButtonsView}>
@@ -129,21 +133,28 @@ const NewTask = (props: INewTaskProps) => {
 
             <View style={styles.inputsView}>
               <PrimaryTextinput
-                inputValue=""
+                inputValue={props.inputVals?.titleVal}
                 maxLength={20}
+                multiline={true}
+                height={60}
                 placeholder=""
-                handleInputChange={() => {}}
+                handleInputChange={val =>
+                  props.handleInputChange('titleVal', val)
+                }
               />
-
               <View
                 style={{
                   marginTop: 10,
                 }}>
                 <PrimaryTextinput
-                  inputValue=""
+                  inputValue={props.inputVals?.descriptionVal}
+                  multiline={true}
+                  height={170}
                   maxLength={20}
                   placeholder="Description (input)"
-                  handleInputChange={() => {}}
+                  handleInputChange={val =>
+                    props.handleInputChange('descriptionVal', val)
+                  }
                 />
               </View>
             </View>

@@ -11,6 +11,8 @@ import PrimaryTextinput from './commons/textInputs/PrimaryTextinput';
 import PrimaryBlackButton from './commons/buttons/PrimaryBlackButton';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {IprojectsData} from '../@types/CommonTypes';
+import AddProjectPopup from './commons/popups/AddProjectPopup';
+import FontFamily from '../constants/FontFamily';
 
 interface INewTaskProps {
   projectsData: IprojectsData[];
@@ -18,10 +20,17 @@ interface INewTaskProps {
     titleVal: string;
     descriptionVal: string;
   };
+  selectedProject: string;
+  isAddProjectPopupVisible: boolean;
+  projectInputVal: string;
+  handleProjectInputVal: (val: string) => void;
+  onAddProjectPopupClose: () => void;
   handleInputChange: (field: string, val: string) => void;
   onTaskCreatePressed: () => void;
   onHeaderCrossPressed: () => void;
   onProjectAddPressed: () => void;
+  onProjectSelectPressed: (item: IprojectsData) => void;
+  onProjectCreatePressed: () => void;
 }
 
 const NewTask = (props: INewTaskProps) => {
@@ -30,9 +39,17 @@ const NewTask = (props: INewTaskProps) => {
       <View style={styles.renderContainer}>
         <PrimaryButton
           text={item.title}
-          textColor=""
-          backgroundColor=""
-          onPress={() => {}}
+          textColor={
+            props.selectedProject === item.title
+              ? AppColors.white
+              : AppColors.black
+          }
+          backgroundColor={
+            props.selectedProject === item.title
+              ? AppColors.black
+              : 'transparent'
+          }
+          onPress={() => props.onProjectSelectPressed(item)}
         />
       </View>
     );
@@ -47,6 +64,13 @@ const NewTask = (props: INewTaskProps) => {
         isOptionButtonVisible={false}
         onHeaderCrossPressed={props.onHeaderCrossPressed}
         onOptionPressed={() => {}}
+      />
+      <AddProjectPopup
+        isAddProjectPopupVisible={props.isAddProjectPopupVisible}
+        projectInputVal={props.projectInputVal}
+        handleProjectInputVal={props.handleProjectInputVal}
+        onAddProjectPopupClose={props.onAddProjectPopupClose}
+        onProjectCreatePressed={props.onProjectCreatePressed}
       />
       <View style={styles.innerContainer}>
         <View style={styles.detailsView}>
@@ -151,7 +175,7 @@ const NewTask = (props: INewTaskProps) => {
                   multiline={true}
                   height={170}
                   maxLength={20}
-                  placeholder="Description (input)"
+                  placeholder="Description (optional)"
                   handleInputChange={val =>
                     props.handleInputChange('descriptionVal', val)
                   }
@@ -202,6 +226,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   projectsTitleText: {
+    fontFamily: FontFamily.semiBold,
     fontSize: 18,
     color: AppColors.black,
   },

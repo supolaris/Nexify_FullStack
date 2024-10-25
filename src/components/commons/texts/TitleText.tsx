@@ -1,6 +1,7 @@
 import {Text, StyleSheet} from 'react-native';
 import React from 'react';
 import {AppColors} from '../../../constants/AppColors';
+import FontFamily from '../../../constants/FontFamily';
 
 interface ITitleTextProps {
   text: string;
@@ -14,7 +15,7 @@ export default TitleText;
 
 const styles = StyleSheet.create({
   text: {
-    fontWeight: 'bold',
+    fontFamily: FontFamily.bold,
     fontSize: 50,
     color: AppColors.black,
   },

@@ -16,6 +16,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {IprojectTasksData} from '../@types/CommonTypes';
 import {ActiveOpacity} from '../utils/CommonFunctions';
+import FontFamily from '../constants/FontFamily';
 
 interface IProjectDetails {
   isCompletedTaskOpen: boolean;
@@ -192,6 +193,7 @@ const styles = StyleSheet.create({
     width: '92%',
   },
   renderTitleText: {
+    fontFamily: FontFamily.medium,
     width: '98%',
     fontSize: 16,
     color: AppColors.black,
@@ -214,8 +216,9 @@ const styles = StyleSheet.create({
   },
   taskCountView: {},
   taskCountText: {
+    fontFamily: FontFamily.medium,
     fontSize: 18,
-    color: AppColors.white,
+    color: AppColors.black,
   },
   buttonsView: {
     marginTop: 10,

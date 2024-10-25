@@ -1,6 +1,6 @@
 export default {
-  regular: '',
-  medium: '',
-  semiBold: '',
-  bold: '',
+  regular: 'Montserrat-Regular',
+  medium: 'Montserrat-Medium',
+  semiBold: 'Montserrat-SemiBold',
+  bold: 'Montserrat-Bold',
 };

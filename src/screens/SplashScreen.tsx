@@ -5,7 +5,7 @@ import {MainStackScreenProps} from '../@types/NavigationTypes';
 const SplashScreen = ({navigation}: MainStackScreenProps<'SplashScreen'>) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('HomeScreen');
+      navigation.replace('WalkthroughScreen');
     }, 1000);
   }, []);
 

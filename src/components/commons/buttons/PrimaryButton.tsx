@@ -2,6 +2,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {AppColors} from '../../../constants/AppColors';
 import {ActiveOpacity} from '../../../utils/CommonFunctions';
+import FontFamily from '../../../constants/FontFamily';
 
 interface IPrimaryButton {
   text: string;
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   text: {
+    fontFamily: FontFamily.regular,
     fontSize: 15,
     color: AppColors.black,
   },

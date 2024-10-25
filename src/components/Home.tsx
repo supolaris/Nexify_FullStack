@@ -15,6 +15,7 @@ import {IprojectsData} from '../@types/CommonTypes';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {ActiveOpacity} from '../utils/CommonFunctions';
+import FontFamily from '../constants/FontFamily';
 
 interface IHomeProps {
   projectsData: IprojectsData[];
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   greetingText: {
+    fontFamily: FontFamily.medium,
     fontSize: 18,
     color: AppColors.black,
   },
@@ -161,8 +163,9 @@ const styles = StyleSheet.create({
   },
   taskCountView: {},
   taskCountText: {
+    fontFamily: FontFamily.medium,
     fontSize: 18,
-    color: AppColors.white,
+    color: AppColors.black,
   },
   buttonsView: {
     marginTop: 10,

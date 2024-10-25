@@ -2,7 +2,7 @@ export const AppColors = {
   white: '#ffffff',
   black: '#000000',
   transparent: 'rgba(0,0,0,0.6)',
-  background: '#FCFCFC',
+  background: '#fdfdfd',
   activeGray: '#4A4A4A',
   inactiveGray: '#A0A0A0 ',
 

@@ -1,6 +1,7 @@
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {TextInput, StyleSheet} from 'react-native';
 import React from 'react';
 import {AppColors} from '../../../constants/AppColors';
+import FontFamily from '../../../constants/FontFamily';
 
 interface IPrimaryTextinputProps {
   inputValue: string;
@@ -35,5 +36,6 @@ const style = StyleSheet.create({
     borderColor: AppColors.black,
     borderRadius: 20,
     paddingHorizontal: 15,
+    fontFamily: FontFamily.regular,
   },
 });

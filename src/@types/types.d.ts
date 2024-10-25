@@ -11,5 +11,5 @@ declare module '*.jpg' {
   export default value;
 }
 declare module globalThis {
-  var globalToken: string;
+  var token: string;
 }

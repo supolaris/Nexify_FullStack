@@ -1,4 +1,4 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import React from 'react';
 import {AppColors} from '../../../constants/AppColors';
 import RoundButton from '../buttons/RoundButton';
@@ -43,7 +43,7 @@ export default PrimaryHeader;
 const styles = StyleSheet.create({
   container: {
     marginTop: 25,
-    height: 70,
+    height: 100,
     justifyContent: 'center',
   },
   innerContainer: {

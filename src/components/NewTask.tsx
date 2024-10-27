@@ -213,7 +213,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 20,
   },
-  detailsView: {},
+  detailsView: {
+    flex: 1,
+  },
   buttonsView: {
     marginTop: 10,
     flexDirection: 'row',
